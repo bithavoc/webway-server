@@ -1,9 +1,3 @@
-// /home/jhernandez/Projects/MsTCP/DevSandbox.WebServer/RequestListener.cs created with MonoDevelop
-// User: jhernandez at 8:11 AM 1/5/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using System.Net;
 using System.Net.Sockets;
