@@ -1,9 +1,3 @@
-// /home/jhernandez/Projects/MsTCP/NetMTP/HeaderParser.cs created with MonoDevelop
-// User: jhernandez at 2:49 PM 11/30/2007
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 using System.Text;
 using System.Text.RegularExpressions;

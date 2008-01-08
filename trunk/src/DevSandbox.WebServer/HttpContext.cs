@@ -1,9 +1,3 @@
-// /home/jhernandez/Projects/MsTCP/DevSandbox.WebServer/HttpContext.cs created with MonoDevelop
-// User: jhernandez at 3:51 PM 1/6/2008
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
-
 using System;
 
 namespace DevSandbox.WebServer
