@@ -68,5 +68,5 @@ namespace DevSandbox.WebServer
 				this.endPoint = value;
 			}
 		}
-	}
+	}//VirtualHost
 }

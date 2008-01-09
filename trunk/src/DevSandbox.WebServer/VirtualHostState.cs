@@ -6,5 +6,5 @@ namespace DevSandbox.WebServer
 	{
 		Online = 0,
 		Offline = 1
-	}
+	}//VirtualHostState
 }

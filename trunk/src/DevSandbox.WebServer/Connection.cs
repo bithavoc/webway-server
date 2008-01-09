@@ -16,7 +16,7 @@ namespace DevSandbox.WebServer
 		private HeaderParser headerParser;
 		private Server server;
 		private RequestListener listener;
-		private bool isClosed = true;
+		private bool isClosed;
 		public Connection(Socket socket,Server server,RequestListener listener)
 		{
 			this.socket = socket;
@@ -148,5 +148,5 @@ namespace DevSandbox.WebServer
 			}
 			return content;
 		}
-	}
+	}//Connection
 }
