@@ -10,5 +10,5 @@ namespace DevSandbox.WebServer
 		public VirtualHostException(string message,Exception innerException) : base(message,innerException)
 		{
 		}
-	}
+	}//VirtualHostException
 }

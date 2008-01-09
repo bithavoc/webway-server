@@ -37,5 +37,5 @@ namespace DevSandbox.WebServer
 				this.port = value;
 			}
 		}
-	}
+	}//VirtualHostEndPoint
 }
