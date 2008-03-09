@@ -32,6 +32,7 @@ namespace DevSandbox.WebServer
 				this.conn.Write(this.buffer.ToArray());
 				this.buffer.SetLength(0);
 			}
+            
 		}
 		
 		public HttpContext Context
@@ -54,10 +55,12 @@ namespace DevSandbox.WebServer
 				InternalDebug.trace("Client is trying to keep alive but we dont support this yet");
 			}
 			this.conn.Close();
+            System.Threading.Thread.CurrentThread.Abort();
 			InternalDebug.trace("Response Flushed and Ended");
 		}
 		 private static string formatResponseDate()
-        {
+        {
+
             string dtStr = System.DateTime.Now.ToString(TextUtil.HttpServerDateFormat, System.Globalization.CultureInfo.GetCultureInfo("en-US").DateTimeFormat);
             return dtStr;
         }
@@ -86,6 +89,12 @@ namespace DevSandbox.WebServer
             sBuilder.Append(TextUtil.Semicolon);
             sBuilder.Append(TextUtil.WhiteSpace);
             sBuilder.Append("WebWay 1.0/Unix");//write Http Server NAME.
+            sBuilder.Append(TextUtil.GlobalNewLineString);
+
+            //Connection:Close
+            sBuilder.Append(TextUtil.HttpHeaderField_Connection_Case);
+            sBuilder.Append(TextUtil.Semicolon);
+            sBuilder.Append(" close");
             sBuilder.Append(TextUtil.GlobalNewLineString);
 
             //CONTENT-TYPE

@@ -22,7 +22,7 @@ namespace webwayd
 			
 			Console.WriteLine("\t\tVirtualhost at localhost:4427");
 			VirtualHost vh0 = new VirtualHost();
-			vh0.EndPoint = new VirtualHostEndPoint("localhost.com",4427);
+			vh0.EndPoint = new VirtualHostEndPoint("localhost",4427);
 			
 			Console.WriteLine("\tUsing HostedRequestLinker");
 			HostedRequestLinker hostedLinker = new HostedRequestLinker();
