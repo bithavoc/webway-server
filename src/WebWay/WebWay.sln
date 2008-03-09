@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webwayd", "..\webwayd\webwayd.csproj", "{6F254422-893F-460B-9543-9352AF48F0C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevSandbox.WebServer", "..\DevSandbox.WebServer\DevSandbox.WebServer.csproj", "{4FAF3891-5E58-47BC-9E37-08E7699C2BDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F254422-893F-460B-9543-9352AF48F0C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F254422-893F-460B-9543-9352AF48F0C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F254422-893F-460B-9543-9352AF48F0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F254422-893F-460B-9543-9352AF48F0C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FAF3891-5E58-47BC-9E37-08E7699C2BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FAF3891-5E58-47BC-9E37-08E7699C2BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FAF3891-5E58-47BC-9E37-08E7699C2BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FAF3891-5E58-47BC-9E37-08E7699C2BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
