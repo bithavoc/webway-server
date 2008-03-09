@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
+    <Compile Include="ConnectionExceptions.cs" />
     <Compile Include="HeaderParser.cs" />
     <Compile Include="Hosted\HostedRequestLinker.cs" />
     <Compile Include="Hosted\ProcessingRequestEventArgs.cs" />

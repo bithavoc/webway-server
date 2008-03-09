@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace DevSandbox.WebServer
 {
-	internal class Connection
+	internal class Connection : IDisposable
 	{
 		private Socket socket;
 		private const string HeaderSeparator = "\n\r";
@@ -17,6 +17,7 @@ namespace DevSandbox.WebServer
 		private Server server;
 		private RequestListener listener;
 		private bool isClosed;
+
 		public Connection(Socket socket,Server server,RequestListener listener)
 		{
 			this.socket = socket;
@@ -28,10 +29,21 @@ namespace DevSandbox.WebServer
             this.socket.LingerState = new LingerOption(true, 60);
             this.socket.Blocking = true;
 		}
+
 		public void Write(byte[] data)
 		{
-			this.socket.Send(data);
-            
+            if (this.isClosed)
+            {
+                throw new ConnectionClosedException("You can not write on a disposed Connection");
+            }
+            try
+            {
+                this.socket.Send(data);
+            }
+            catch (SocketException sex)
+            {
+                this.Close();  
+            }
 		}
 		
 		[System.Diagnostics.ConditionalAttribute("DEBUG")]
@@ -129,7 +141,7 @@ namespace DevSandbox.WebServer
             
 			//this.socket.Shutdown(SocketShutdown.Both);
 			this.socket.Close();
-			this.socket = null;
+			
 		}
 		byte[] receiveContent(byte[] initialContentBuffer,int contentLength)
 		{
@@ -154,5 +166,18 @@ namespace DevSandbox.WebServer
 			}
 			return content;
 		}
-	}//Connection
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            if (!this.isClosed)
+            {
+                this.Close();
+            }
+            this.socket = null;
+        }
+
+        #endregion
+    }//Connection
 }
