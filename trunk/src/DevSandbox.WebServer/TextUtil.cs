@@ -35,6 +35,7 @@ namespace DevSandbox.WebServer
 
         public const string HttpHeaderField_ContentLength = "CONTENT-LENGTH";
         public const string HttpHeaderField_ContentLength__Case = "Content-Length";
+
             public const string HttpHeaderField_Server__Case = "Server";
 
         public const string Semicolon= ":";

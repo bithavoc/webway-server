@@ -23,10 +23,15 @@ namespace DevSandbox.WebServer
 			this.server = server;
 			this.listener = listener;
 			this.headerParser = new HeaderParser();
+
+            //Prepare the socket.
+            this.socket.LingerState = new LingerOption(true, 60);
+            this.socket.Blocking = true;
 		}
 		public void Write(byte[] data)
 		{
 			this.socket.Send(data);
+            
 		}
 		
 		[System.Diagnostics.ConditionalAttribute("DEBUG")]
@@ -121,7 +126,8 @@ namespace DevSandbox.WebServer
 		public void Close()
 		{
 			this.isClosed = true;
-			this.socket.Shutdown(SocketShutdown.Both);
+            
+			//this.socket.Shutdown(SocketShutdown.Both);
 			this.socket.Close();
 			this.socket = null;
 		}
