@@ -54,7 +54,9 @@ namespace DevSandbox.WebServer
 			{
 				InternalDebug.trace("Client is trying to keep alive but we dont support this yet");
 			}
-			this.conn.Close();
+			this.conn.Dispose();
+            this.conn = null;
+            System.GC.WaitForPendingFinalizers();
             System.Threading.Thread.CurrentThread.Abort();
 			InternalDebug.trace("Response Flushed and Ended");
 		}
