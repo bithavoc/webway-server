@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view:View name="CountSuccess" namespace="DonisDotCom.Counter" path="Counter.CounterSuccess" 
+		   xmlns:view="http://dev-sandbox.com/DynamicView.xsd">
+	<Body>
+		<Html><![CDATA[<h1>Este es el contador de la aplicacion y la fecha es ]]></Html>
+		<Code>Write(this["Fecha"]);</Code>
+		<Html><![CDATA[</h1>]]></Html>
+		<Html><![CDATA[<br/>]]></Html>
+		<Code><![CDATA[ for(int i = 0;i < 100000;i++){ ]]></Code>
+		<Html><![CDATA[<p style="background-color:red">]]></Html>
+		<Code>Write(i);</Code>
+		<Html><![CDATA[</p>]]></Html>
+		<Code>}</Code>
+	</Body>
+</view:View>

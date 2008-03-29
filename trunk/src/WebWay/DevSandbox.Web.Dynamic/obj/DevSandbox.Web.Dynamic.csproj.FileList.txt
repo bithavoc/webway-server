@@ -1,0 +1,14 @@
+bin\Debug\DevSandbox.Web.Dynamic.dll
+bin\Debug\DevSandbox.Web.Dynamic.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\DevSandbox.Web.Dynamic.dll
+obj\Debug\DevSandbox.Web.Dynamic.pdb
+bin\Debug\DevSandbox.WebServer.dll
+bin\Debug\DevSandbox.WebServer.pdb
+bin\Release\DevSandbox.Web.Dynamic.dll
+bin\Release\DevSandbox.Web.Dynamic.pdb
+bin\Release\DevSandbox.WebServer.dll
+bin\Release\DevSandbox.WebServer.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\DevSandbox.Web.Dynamic.dll
+obj\Release\DevSandbox.Web.Dynamic.pdb

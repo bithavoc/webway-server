@@ -51,7 +51,7 @@ namespace DevSandbox.WebServer
 			}
 		}//Listeners
 		
-		internal void __processRequestFromListener(RequestListener listener,Request request,Response response)
+		internal bool __processRequestFromListener(RequestListener listener,Request request,Response response)
 		{
 			
 			//RequestListener invokes this method after Parsing the request.
@@ -73,10 +73,10 @@ namespace DevSandbox.WebServer
 					                                              {
 						vh.ProcessRequest(context);
 					});
-					break;
+                    return true;
 				}//if
 			}//foreach
-			
+            return false;
 		}//processRequestFromListener
 		
 		public class VirtualHostCollection : System.Collections.CollectionBase

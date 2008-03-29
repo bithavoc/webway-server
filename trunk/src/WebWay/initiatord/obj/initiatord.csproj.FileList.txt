@@ -1,0 +1,9 @@
+bin\Debug\initiatord.exe
+bin\Debug\initiatord.pdb
+bin\Debug\DevSandbox.Web.Dynamic.dll
+bin\Debug\DevSandbox.WebServer.dll
+bin\Debug\DevSandbox.Web.Dynamic.pdb
+bin\Debug\DevSandbox.WebServer.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\initiatord.exe
+obj\Debug\initiatord.pdb

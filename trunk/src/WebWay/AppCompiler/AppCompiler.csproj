@@ -1,0 +1,71 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ED81A397-F48D-419F-8434-4718418F7EB7}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AppCompiler</RootNamespace>
+    <AssemblyName>AppCompiler</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compiler\ActionTypeNotFoundException.cs" />
+    <Compile Include="Compiler\ApplicationCompiler.cs" />
+    <Compile Include="Compiler\ApplicationCompilerException.cs" />
+    <Compile Include="Parser\ActionInfo.cs" />
+    <Compile Include="Parser\ApplicationFileInfo.cs" />
+    <Compile Include="Parser\ApplicationFileParser.cs" />
+    <Compile Include="Parser\ViewBaseInfo.cs" />
+    <Compile Include="Parser\ViewSourceInfo.cs" />
+    <Compile Include="Parser\ReferenceInfo.cs" />
+    <Compile Include="Parser\ViewInfo.cs" />
+    <Compile Include="Parser\ViewSources\CodeMemberInfo.cs" />
+    <Compile Include="Parser\ViewSources\HtmlMemberInfo.cs" />
+    <Compile Include="Parser\ViewSources\ViewSourceInfo.cs" />
+    <Compile Include="Parser\ViewSources\ViewSourceMemberInfo.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DevSandbox.WebServer\DevSandbox.WebServer.csproj">
+      <Project>{4FAF3891-5E58-47BC-9E37-08E7699C2BDC}</Project>
+      <Name>DevSandbox.WebServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevSandbox.Web.Dynamic\DevSandbox.Web.Dynamic.csproj">
+      <Project>{7AF4A46A-1AD8-42CD-AF3E-9A504D200DB5}</Project>
+      <Name>DevSandbox.Web.Dynamic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

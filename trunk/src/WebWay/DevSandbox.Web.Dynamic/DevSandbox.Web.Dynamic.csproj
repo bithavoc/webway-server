@@ -1,0 +1,75 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7AF4A46A-1AD8-42CD-AF3E-9A504D200DB5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevSandbox.Web.Dynamic</RootNamespace>
+    <AssemblyName>DevSandbox.Web.Dynamic</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application.cs" />
+    <Compile Include="ApplicationRequestLinker.cs" />
+    <Compile Include="Action.cs" />
+    <Compile Include="Initiator\ApplicationInitiatorAttribute.cs" />
+    <Compile Include="Initiator\Initiator.cs" />
+    <Compile Include="Initiator\InitiatorInfo.cs" />
+    <Compile Include="Initiator\InitiatorVirtualHost.cs" />
+    <Compile Include="IParameterValidator.cs" />
+    <Compile Include="IValidator.cs" />
+    <Compile Include="View.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewParameter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SampleFiles\DynamicView.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SampleFiles\DynamicView.xsx">
+      <DependentUpon>DynamicView.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SampleFiles\Application1.xml" />
+    <Content Include="SampleFiles\View1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DevSandbox.WebServer\DevSandbox.WebServer.csproj">
+      <Project>{4FAF3891-5E58-47BC-9E37-08E7699C2BDC}</Project>
+      <Name>DevSandbox.WebServer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -42,6 +42,7 @@ namespace DevSandbox.WebServer
 		//This method is called on a private thread for the request.
 		internal void ProcessRequest(HttpContext context)
 		{
+            if (!this.requestLinker.IsInitiated) this.requestLinker.Init();
 			this.requestLinker.ProcessRequest(context);
 		}
 		

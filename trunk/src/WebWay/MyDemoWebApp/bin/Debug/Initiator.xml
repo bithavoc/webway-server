@@ -1,0 +1,5 @@
+<Initiator>
+	<Hosts>
+		<VirtualHost listener-ip="127.0.0.1"  name="127.0.0.1" port="4427" applicationAssembly="MyDemoWebApp-Initiator.dll"/>
+	</Hosts>
+</Initiator>

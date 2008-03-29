@@ -1,12 +1,14 @@
 using System;
 using DevSandbox.WebServer;
 using DevSandbox.WebServer.Hosted;
+using DevSandbox.Web.Dynamic;
+using DevSandbox.Web.Dynamic.Initiator;
 
 namespace webwayd
 {
 	class MainClass
 	{
-		public static void Main()
+		/*public static void Main()
 		{
 			Console.WriteLine("webwayd 1.0");
 			Console.WriteLine("Initializing");
@@ -34,8 +36,33 @@ namespace webwayd
 			server.Start();
 			Console.WriteLine("\tServer Started and Listening... waiting for clients");
 			Console.ReadLine();
-		}
-		
+		}*/
+        public static void Main()
+        {
+            Console.WriteLine("webwayd 1.0 - With WebDynamic MVC 1.0");
+            Console.WriteLine("Initializing");
+            Server server = new Server();
+
+            Console.WriteLine("\tInitializing Listeners");
+
+            Console.WriteLine("\t\tListener at *:4427");
+            Initiator init = new Initiator(server);
+
+            Console.WriteLine("\tInitializing Info");
+
+            InitiatorInfo info = new InitiatorInfo();
+            info.VirtualHosts.Add(
+                new InitiatorVirtualHost(
+                    "127.0.0.1",
+                    4427,
+                    @"C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2005\Projects\webway-server\WebWay\MyDemoWebApp\bin\Debug\MyDemoWebApp-Initiator.dll",
+                    "127.0.0.1"));
+            init.LoadFromInfo(info);
+            Console.WriteLine("\tStarting Server");
+            server.Start();
+            Console.WriteLine("\tServer Started and Listening... waiting for clients");
+            Console.ReadLine();
+        }
 		private static void  hostedLinkerRequest(HostedRequestLinker linker,ProcessingRequestEventArgs args)
 		{
 			if(args.Context.Request.ResourcePath == "/")
