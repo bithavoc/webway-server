@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view:View name="CreateLogin" namespace="DonisDotCom.Security" 
+		   xmlns:view="http://dev-sandbox.com/DynamicView.xsd">
+	<Body>
+		<Html><![CDATA[DO NOT MODIFY THIS VIEW, THIS IS A SAMPLE]]></Html>
+	</Body>
+</view:View>

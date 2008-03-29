@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view:View name="Login" namespace="MyDemoWebApp.Views.AuthenticateSuccess" path="DemoApp.AuthenticateSuccess" 
+		   xmlns:view="http://dev-sandbox.com/DynamicView.xsd">
+	<Body>
+		<Html>
+			<![CDATA[<h2>Bienvenido! ]]>
+		</Html>
+		<Code>
+			this.Write(this.Parameters["username"].Value);
+		</Code>
+		<Html>
+			<![CDATA[</h2>]]>
+		</Html>
+	</Body>
+</view:View>

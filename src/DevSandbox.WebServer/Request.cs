@@ -12,10 +12,23 @@ namespace DevSandbox.WebServer
 		private string protocolId;
 		private string host;
 		private int port;
+        private Dictionary<string, string> postParameters;
+
 		internal Request()
 		{
-			
+            this.header = new RequestHeader();
+            this.postParameters = new Dictionary<string, string>();
+
 		}
+
+        public Dictionary<string,string> PostParameters
+        {
+            get 
+            { 
+                return postParameters; 
+            }
+        }
+
 		public byte[] Data
 		{
 			get
@@ -25,19 +38,6 @@ namespace DevSandbox.WebServer
 			set
 			{
 				this.data = value;
-			}
-		}
-		
-		public void InitHeader(RequestHeader header)
-		{
-			this.header = header;
-		}
-		
-		public void InitHeader()
-		{
-			if(this.header == null)
-			{
-				this.header = new RequestHeader();
 			}
 		}
 		
@@ -56,6 +56,16 @@ namespace DevSandbox.WebServer
 				return this.data == null?0:this.data.Length;
 			}
 		}
+
+        public const string ContentTypeKey = "Content-Type";
+        public string ContentType
+        {
+            get
+            {
+                
+                return this.header.Contains(ContentTypeKey)?this.header[ContentTypeKey].Value:string.Empty;
+            }
+        }
 		
 		public RequestHeader Headers
 		{

@@ -1,0 +1,9 @@
+obj\Debug\ResolveAssemblyReference.cache
+bin\Debug\AppCompiler.exe
+bin\Debug\AppCompiler.pdb
+bin\Debug\DevSandbox.Web.Dynamic.dll
+bin\Debug\DevSandbox.WebServer.dll
+bin\Debug\DevSandbox.Web.Dynamic.pdb
+bin\Debug\DevSandbox.WebServer.pdb
+obj\Debug\AppCompiler.exe
+obj\Debug\AppCompiler.pdb

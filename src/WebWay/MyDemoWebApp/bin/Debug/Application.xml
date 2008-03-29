@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dynamic:Application xmlns:dynamic="http://dev-sandbox.com/DynamicView.xsd" name="MyDemoWebApp" version="1.0">
+	<References>
+		<Reference name="MyDemoWebApp.dll"/>
+	</References>
+	<Actions>
+		<Action path="/Login" type="MyDemoWebApp.LoginAction"/>
+		<Action path="/Count" type="MyDemoWebApp.CountAction"/>
+		<Action path="/Authenticate" type="MyDemoWebApp.AuthenticateAction"/>
+	</Actions>
+	<Views>
+		<ViewSource fileName="CountSuccess.xml"/>
+		<ViewSource fileName="Login.xml"/>
+		<ViewSource fileName="AuthenticateSuccess.xml"/>
+	</Views>
+</dynamic:Application>

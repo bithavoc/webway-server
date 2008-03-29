@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<dynamic:Application name="App1" version="2.1" xmlns:dynamic="http://dev-sandbox.com/DynamicView.xsd">
+  <References>
+    <Reference name="System.data.dll" />
+    <Reference name="System.web.dll" />
+  </References>
+</dynamic:Application>

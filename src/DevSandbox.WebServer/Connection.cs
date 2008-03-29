@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Text;
@@ -13,21 +14,20 @@ namespace DevSandbox.WebServer
 		private const string HeaderSeparator = "\n\r";
 		private int bufferSize = 5;
 		private int contentBufferSize = 32;
-		private HeaderParser headerParser;
 		private Server server;
 		private RequestListener listener;
 		private bool isClosed;
-
+        private static List<Connection> conns = new List<Connection>();
 		public Connection(Socket socket,Server server,RequestListener listener)
 		{
 			this.socket = socket;
 			this.server = server;
 			this.listener = listener;
-			this.headerParser = new HeaderParser();
 
             //Prepare the socket.
             this.socket.LingerState = new LingerOption(true, 60);
             this.socket.Blocking = true;
+            conns.Add(this);
 		}
 
 		public void Write(byte[] data)
@@ -45,12 +45,19 @@ namespace DevSandbox.WebServer
                 this.Close();  
             }
 		}
-		
-		[System.Diagnostics.ConditionalAttribute("DEBUG")]
+
+        [System.Diagnostics.ConditionalAttribute(InternalDebug.DEBUG_SYMBOL)]
 		internal static void trace(string val,params object[] vals)
 		{
 			InternalDebug.trace(val,vals);
 		}
+        [System.Diagnostics.ConditionalAttribute(InternalDebug.DEBUG_SYMBOL)]
+        internal static void traceColor(ConsoleColor color, string val, params object[] vals)
+        {
+            Console.ForegroundColor = color;
+            InternalDebug.trace(val, vals);
+            Console.ResetColor();
+        }
 		internal static string selfTraceByteArr(byte[] buff)
 		{
 			return selfTraceByteArr(buff,0,buff.Length);
@@ -72,28 +79,30 @@ namespace DevSandbox.WebServer
 			return s;
 		}
 		
-		void parseHeader(out byte[] initialContentBuffer)
+		void parseHeader(out byte[] initialContentBuffer,Request request)
 		{
-			
-			initialContentBuffer = null;
-			//Begin: ReadHeader
-			//unsafe read buffer.
-			byte[] receiveBuffer = null;
-			int receiveBufferCount = 0;				
-			while(true)
-			{				
-				receiveBuffer = new byte[this.bufferSize];
-				trace("Receiving");
-				receiveBufferCount = this.socket.Receive(receiveBuffer);
-				if(receiveBufferCount == 0)break;
-				
-				trace("Received buffer='{0}','{1}'",selfTraceByteArr(receiveBuffer),Encoding.ASCII.GetString(receiveBuffer));
-				trace("Parsing Header Lines");
-				bool stopAnalizingHeader = this.headerParser.Analize(new ArraySegment<byte>(receiveBuffer,0,receiveBufferCount),out initialContentBuffer);
-				receiveBuffer = null;
-				if(stopAnalizingHeader)break;
-			}// while
+#if(DEBUG)
+            System.IO.MemoryStream mstream = new System.IO.MemoryStream();
+           
+#endif
+            HeaderParser.Parse(delegate(out ArraySegment<byte> buffer)
+            {
+                byte[] receiveBuffer = new byte[this.bufferSize];
+                int receiveBufferCount = this.socket.Receive(receiveBuffer);
+                if (receiveBufferCount == 0)
+                {
+                    buffer = new ArraySegment<byte>(receiveBuffer, 0, 0);
+                    return false;
+                }
+
+                buffer = new ArraySegment<byte>(receiveBuffer, 0, receiveBufferCount);
+
+                return true;
+
+            }, out initialContentBuffer, request);
 		}
+
+        
 
 		public void Listen()
 		{
@@ -103,26 +112,40 @@ namespace DevSandbox.WebServer
 				try{
 						byte[] initialContentBuffer = null;
 						Request request= new Request();
-						
-						RequestHeader mh = new RequestHeader();
-						this.headerParser.Reset(request,mh);
-						
-						parseHeader(out initialContentBuffer);
-						request.InitHeader(mh);
-						foreach(HeaderLine h in mh)
+                        RequestHeader mh = request.Headers;
+
+                        parseHeader(out initialContentBuffer, request);
+						foreach(HeaderLine h in request.Headers)
 						{
 							InternalDebug.trace("HeaderLine='{0}'='{1}'",h.Name,h.Value);
 						}
 						
 						int contentLength = mh.Contains("Content-Length")? int.Parse(request.Headers["Content-Length"].Value):0;
+
+                    const string FormMime = "application/x-www-form-urlencoded";
 						if(contentLength != 0)
 						{
 							request.Data = receiveContent(initialContentBuffer,contentLength);
 							trace("Received Content bytes{0}",selfTraceByteArr(request.Data));
+                            if (request.ContentType == FormMime) //is a form.
+                            {
+                                HeaderParser.ParseForm(request);
+                                
+                            }
 						}
 						Response response = new Response(this);
+
+                        if (string.IsNullOrEmpty(request.Hostname))
+                        {
+                            //Si no hay Hostname(como es el caso de los POST) entonces colocamos la IP.
+                            request.Hostname = ((IPEndPoint)this.socket.RemoteEndPoint).Address.ToString();
+                        }
 						//Send the request to the listener.
-						this.server.__processRequestFromListener(this.listener,request,response);
+						bool listenerVHostFound = this.server.__processRequestFromListener(this.listener,request,response);
+                        if (!listenerVHostFound)
+                        {
+                            this.Dispose();
+                        }
 						/*if(RequestReceived != null)
 						{
 							this.RequestReceived(this,new RequestReceivedEventArgs(request));
@@ -140,8 +163,8 @@ namespace DevSandbox.WebServer
 			this.isClosed = true;
             
 			//this.socket.Shutdown(SocketShutdown.Both);
-			this.socket.Close();
-			
+			//this.socket.Close();
+			//TODO: Implementar Keep-alive y dejar que la conexion se cierre sola por periodo de tiempo o porque el cliente cerro la conexion.
 		}
 		byte[] receiveContent(byte[] initialContentBuffer,int contentLength)
 		{
