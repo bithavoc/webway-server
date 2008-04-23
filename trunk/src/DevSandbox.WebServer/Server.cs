@@ -73,10 +73,10 @@ namespace DevSandbox.WebServer
 					                                              {
 						vh.ProcessRequest(context);
 					});
-                    return true;
+                    return true;//We found a VirtualHost for this request.
 				}//if
 			}//foreach
-            return false;
+            return false;//We dont found anything.
 		}//processRequestFromListener
 		
 		public class VirtualHostCollection : System.Collections.CollectionBase
