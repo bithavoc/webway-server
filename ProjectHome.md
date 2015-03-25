@@ -1,0 +1,1 @@
+WebWay is a Cross-Platform HTTP library and Server written entirely in C# and Mono. It is a Server suitable for cross-platform hosted requests, dedicated isolated applications or multi-isolated applications.
